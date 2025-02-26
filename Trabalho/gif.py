@@ -1,7 +1,7 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import imageio
-import os
+import numpy as np # Para cálculos matemáticos, como a matriz de rotação e a conversão de ângulos para radianos
+import matplotlib.pyplot as plt # Para desenhar o pêndulo e criar a animação quadro a quadro
+import imageio # Para gerar o GIF a partir dos quadros salvos
+import os # Para criar a pasta "frames" e organizar as imagens da animação
 
 # Criar pasta para armazenar os frames
 output_dir = "frames"
@@ -35,11 +35,11 @@ for i in range(n_frames):
     angulo = np.radians(30 * np.sin(2 * np.pi * i / n_frames))
     # Oscilação entre -30° e 30°
     # radians = converte o ângulo de graus para radianos, pois a matriz de rotação usa radianos.
-    # Matriz de rotação : essa matriz multiplica a posição do pêndulo, girando em torno do ponto fixo (0,0)
     # Quando sin(...) = -1, temos -30° (ponto mais à esquerda).
     # Quando sin(...) = 0, temos 0° (posição central, vertical).
     # Quando sin(...) = 1, temos 30° (ponto mais à direita).
     
+    # Matriz de rotação : essa matriz multiplica a posição do pêndulo, girando em torno do ponto fixo (0,0)
     matriz_rotacao = np.array([
         [np.cos(angulo), -np.sin(angulo)],
         [np.sin(angulo), np.cos(angulo)]
@@ -69,7 +69,7 @@ for i in range(n_frames):
     # ⁡=
     #  [ 0.866 0.5
     #   -0.5   0.866 ]
-    # Isso faz com que o ponto seja rotacionado 30° no sentido horário.
+    # Isso faz com que o ponto seja rotacionado -30° no sentido horário.
 
     # Aplicar rotação ao ponto do pêndulo
     ponto_rotacionado = np.dot(matriz_rotacao, ponto_pendulo)
